@@ -17,7 +17,7 @@ spec:
       nodeName: kube-node1
       containers:
         - name: django
-          image: jjunch/django:latest
+          image: jjunch/django:5
           imagePullPolicy: Always
           env:
             - name: DJANGO_DB_ENGINE
