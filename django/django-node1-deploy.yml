@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-node1-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+      node: node1
+  template:
+    metadata:
+      labels:
+        app: django
+        node: node1
+    spec:
+      nodeName: kube-node1
+      containers:
+        - name: django
+          image: jjunch/django:latest
+          imagePullPolicy: Always
+          env:
+            - name: DJANGO_DB_ENGINE
+              value: django.db.backends.postgresql
+            - name: DJANGO_DB_NAME
+              value: mysite
+            - name: DJANGO_DB_USER
+              value: mysite
+            - name: DJANGO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: db-password
+            - name: DJANGO_DB_HOST
+              value: postgres-svc
+            - name: DJANGO_DB_PORT
+              value: "5432"
+          ports:
+            - containerPort: 8000
