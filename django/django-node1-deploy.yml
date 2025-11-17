@@ -15,6 +15,8 @@ spec:
         node: node1
     spec:
       nodeName: kube-node1
+      imagePullSecrets:
+        - name: dockerhub-cred
       containers:
         - name: django
           image: jjunch/django:5
