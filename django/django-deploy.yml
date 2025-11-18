@@ -13,11 +13,11 @@ spec:
       labels:
         app: django
     spec:
-      # node1, node2 두 노드만 사용하도록 라벨 기반으로 제한
+      # node1, node2 ???�드�??�용?�도�??�벨 기반?�로 ?�한
       nodeSelector:
         django-node: "true"
 
-      # 가능한 한 서로 다른 노드에 1개씩 떨어지도록 스케줄링
+      # 가?�한 ???�로 ?�른 ?�드??1개씩 ?�어지?�록 ?��?줄링
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
@@ -31,7 +31,7 @@ spec:
 
       containers:
         - name: django
-          image: jjunch/django:latest
+          image: jjunch/django:35
           imagePullPolicy: Always
           env:
             - name: DJANGO_DB_ENGINE
