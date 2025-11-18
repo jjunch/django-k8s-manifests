@@ -19,7 +19,7 @@ spec:
         app: django
     spec:
       affinity:
-        # 1) 사용할 노드 범위를 kube-node1, kube-node2로 제한
+        # 1) ?�용???�드 범위�?kube-node1, kube-node2�??�한
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -30,7 +30,7 @@ spec:
                       - kube-node1
                       - kube-node2
 
-        # 2) 같은 app=django 파드끼리는 같은 노드에 같이 못 있게 강제
+        # 2) 같�? app=django ?�드?�리??같�? ?�드??같이 �??�게 강제
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
@@ -46,7 +46,7 @@ spec:
 
       containers:
         - name: django
-          image: jjunch/django:35
+          image: jjunch/django:36
           imagePullPolicy: Always
           env:
             - name: DJANGO_DB_ENGINE
