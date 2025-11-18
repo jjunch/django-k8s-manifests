@@ -20,7 +20,7 @@ spec:
         - name: dockerhub-cred
       containers:
         - name: django
-          image: jjunch/django:21
+          image: jjunch/django:22
           imagePullPolicy: Always
           env:
             - name: DJANGO_DB_ENGINE
