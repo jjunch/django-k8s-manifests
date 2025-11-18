@@ -13,18 +13,28 @@ spec:
       labels:
         app: django
     spec:
-      # node1, node2 ???�드�??�용?�도�??�벨 기반?�로 ?�한
-      nodeSelector:
-        django-node: "true"
+      affinity:
+        # 1) 사용할 노드 범위를 kube-node1, kube-node2로 제한
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - kube-node1
+                      - kube-node2
 
-      # 가?�한 ???�로 ?�른 ?�드??1개씩 ?�어지?�록 ?��?줄링
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: django
+        # 2) 같은 app=django 파드끼리는 같은 노드에 같이 못 있게 강제
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - django
+              topologyKey: kubernetes.io/hostname
 
       imagePullSecrets:
         - name: dockerhub-cred
