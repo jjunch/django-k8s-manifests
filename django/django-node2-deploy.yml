@@ -4,6 +4,7 @@ metadata:
   name: django-node2-deploy
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: django
