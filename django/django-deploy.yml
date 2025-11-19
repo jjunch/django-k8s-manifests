@@ -46,7 +46,7 @@ spec:
 
       containers:
         - name: django
-          image: jjunch/django:42
+          image: jjunch/django:43
           imagePullPolicy: Always
           env:
             - name: DJANGO_DB_ENGINE
